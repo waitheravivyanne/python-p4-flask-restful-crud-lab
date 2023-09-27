@@ -1,7 +1,15 @@
 #!/usr/bin/env python3
-
+from flask import Flask
 from app import app
-from models import db, Plant
+from models import db
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///instance/app.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db.init_app(app)
+
+from models import Plant
 
 
 with app.app_context():
